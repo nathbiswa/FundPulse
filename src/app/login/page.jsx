@@ -14,6 +14,7 @@ import {
     Loader2,
     Coins
 } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
     const [formData, setFormData] = useState({
@@ -55,6 +56,12 @@ export default function LoginPage() {
                 password: formData.password,
                 callbackURL: "/dashboard",
             });
+
+            if (data) {
+                toast.success("Login successful. Redirecting to dashboard...");
+            } else {
+                toast.error("Invalid email or password. Please try again.");
+            }
 
             if (authError) {
                 setError(authError.message || "Invalid email or password. Please try again.");
