@@ -1,3 +1,4 @@
+import ExploreByCategory from "@/components/ExploreByCategory";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import TopFundedCampaigns from "@/components/TopFundedCampaigns";
@@ -10,6 +11,7 @@ export default function HomePage() {
       <HeroSection />
       <TopFundedCampaigns />
       <HowItWorks />
+      <ExploreByCategory />
     </div>
   )
 };
