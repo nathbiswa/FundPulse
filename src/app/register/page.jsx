@@ -125,11 +125,27 @@ export default function RegisterPage() {
 
             if (authError) {
                 setError(authError.message || "Registration failed. Email might already exist.");
-            } else {
-                // সফল রেজিস্টার হলে ড্যাশবোর্ডে নিয়ে যাবে
-                router.push("/dashboard");
-                router.refresh();
             }
+            // else {
+            //     // সফল রেজিস্টার হলে ড্যাশবোর্ডে নিয়ে যাবে
+            //     router.push("/dashboard");
+            //     router.refresh();
+            // }
+            const res = await fetch("http://localhost:5000/api/users/init-credits", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    role: formData.role, // 'Supporter' হলে ৫০ ক্রেডিট, 'Creator' হলে ২০ ক্রেডিট
+                }),
+            });
+
+            const result = await res.json();
+            console.log("Credits initialized response:", result);
+
+
         } catch (err) {
             console.error("Registration Error:", err);
             setError("An unexpected error occurred during registration. Please try again.");
